@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/searchbutton"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/searchbarbackground"
+        android:minHeight="?attr/actionBarSize"
+        app:logo="@drawable/search"
+        app:title="Search"
+        app:titleMarginStart="32dp"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+
+        />
+    <ListView
+        android:id="@+id/searchResultView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_above="@+id/below"
+        android:layout_below="@id/toolbar"/>
+
+    <LinearLayout
+        android:id="@+id/below"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:id="@+id/inbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableTop="@drawable/inbox"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingTop="10dp"
+            android:text="Inbox"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:id="@+id/profile"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableTop="@drawable/profile"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingTop="10dp"
+            android:text="Profile"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/host"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableTop="@drawable/arrow"
+            android:paddingLeft="40dp"
+            android:paddingRight="35dp"
+            android:paddingTop="10dp"
+            android:text="Host"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:textColor="@color/black"
+            />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
