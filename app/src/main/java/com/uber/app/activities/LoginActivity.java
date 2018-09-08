@@ -18,8 +18,11 @@ import com.google.gson.Gson;
 import com.uber.app.R;
 import com.uber.app.Utils.util;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 
@@ -50,23 +53,13 @@ public class LoginActivity extends AppCompatActivity {
 
         progressDialog =  new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
-        _loginButton.setOnClickListener(new View.OnClickListener() {
+        _loginButton.setOnClickListener(v -> login());
 
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
-
-        _signupLink.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
-                finish();
-                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-            }
+        _signupLink.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+            startActivityForResult(intent, REQUEST_SIGNUP);
+            finish();
+            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         });
 
 
@@ -167,22 +160,20 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected User doInBackground(String... params) {
 
-            String uri = "";
+            String baseAddress = "";
             try {
-                uri = util.getProperty("baseAddress",getApplicationContext()) +  "/login";
+                baseAddress = util.getProperty("baseAddress",getApplicationContext());
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            User user = new User();
-            user.setUsername(params[0]);
-            user.setPassword(params[1]);
+            UriComponents uriComponents = UriComponentsBuilder
+                    .fromHttpUrl(baseAddress + "/user/login")
+                    .path("/{username}/{password}")
+                    .build().expand(params[0], params[1]).encode();
 
-            User result = null;
             try {
-                HttpEntity<User> request = new HttpEntity<>(user);
-                result = restTemplate.postForObject(uri,request, User.class);
-                return result;
+                return restTemplate.getForObject(uriComponents.toUri(), User.class);
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
             }
