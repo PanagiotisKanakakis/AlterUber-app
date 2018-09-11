@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="car">
+        <item>Ford</item>
+        <item>Fiat</item>
+        <item>Audi</item>
+    </string-array>
+    <string-array name="years">
+        <item>1990</item>
+    </string-array>
+    <string-array name="models">
+        <item>Fiesta</item>
+    </string-array>
+</resources>

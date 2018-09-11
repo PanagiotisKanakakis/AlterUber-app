@@ -1,11 +1,175 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.airbnb.activities.MainActivity">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
 
-</RelativeLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:baselineAligned="false"
+        android:fitsSystemWindows="true"
+        android:orientation="horizontal"
+        tools:context=".activities.MainActivity">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="588dp">
+
+
+            <TextView
+                android:id="@+id/driverView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="8dp"
+                android:text="Driver"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto_thin"
+                app:layout_constraintBottom_toTopOf="@+id/driverTextView"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+            <TextView
+                android:id="@+id/riderView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="8dp"
+                android:text="Rider"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto_thin"
+                app:layout_constraintBottom_toTopOf="@+id/riderTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/driverView"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/guideline"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/driverTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:padding="8dp"
+                android:text="Find everything you need to track your success on the road."
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto_thin"
+                app:layout_constraintEnd_toStartOf="@+id/riderTextView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/driverView" />
+
+            <TextView
+                android:id="@+id/riderTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:padding="8dp"
+                android:text="Manage your payment options, review trip history, and more."
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto_thin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/driverTextView"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/riderView" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="209dp"
+                android:layout_height="253dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="44dp"
+                android:src="@drawable/uber"
+                app:layout_constraintBottom_toTopOf="@+id/guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <Button
+                android:id="@+id/driver_sign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="29dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="41dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginTop="62dp"
+                android:background="@android:color/background_dark"
+                android:drawablePadding="16dp"
+                android:drawableRight="@drawable/icons8_right_24"
+                android:padding="16dp"
+                android:text="DRIVER SIGN IN"
+                android:textColor="@android:color/background_light"
+                app:fontFamily="@font/roboto_thin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/driverTextView"
+                app:layout_constraintVertical_bias="0.25" />
+
+            <Button
+                android:id="@+id/rider_sign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="29dp"
+                android:layout_marginEnd="58dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="58dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="63dp"
+                android:background="@android:color/background_dark"
+                android:drawablePadding="16dp"
+                android:drawableRight="@drawable/icons8_right_24"
+                android:padding="16dp"
+                android:text="RIDER SIGN IN"
+                android:textColor="@android:color/background_light"
+                android:textStyle="normal"
+                app:fontFamily="@font/roboto_thin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/riderTextView"
+                app:layout_constraintVertical_bias="0.27" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="338dp" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+</ScrollView>

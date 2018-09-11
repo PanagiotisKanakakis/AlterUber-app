@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/imgView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:background="@drawable/profilebig" />
+
+        <com.beardedhen.androidbootstrap.BootstrapDropDown
+            android:id="@+id/car"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="24dp"
+            android:gravity="right"
+            android:textSize="30sp"
+            android:typeface="normal"
+            app:bootstrapBrand="regular"
+            app:bootstrapExpandDirection="down"
+            app:bootstrapSize="md"
+            app:bootstrapText="Select a Make"
+            app:dropdownResource="@array/car"
+            app:roundedCorners="true" />
+
+        <com.beardedhen.androidbootstrap.BootstrapDropDown
+            android:id="@+id/model"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="24dp"
+            android:gravity="right"
+            android:textSize="30sp"
+            android:typeface="normal"
+            app:bootstrapBrand="regular"
+            app:bootstrapExpandDirection="down"
+            app:bootstrapSize="md"
+            app:bootstrapText="Select a Model"
+            app:dropdownResource="@array/models"
+            app:roundedCorners="true" />
+
+        <com.beardedhen.androidbootstrap.BootstrapDropDown
+            android:id="@+id/year"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="24dp"
+            android:gravity="right"
+            android:textSize="30sp"
+            android:typeface="normal"
+            app:bootstrapBrand="regular"
+            app:bootstrapExpandDirection="down"
+            app:bootstrapSize="md"
+            app:bootstrapText="Select a Year"
+            app:dropdownResource="@array/years"
+            app:roundedCorners="true" />
+
+        <!-- Password Re-enter Label -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_license"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Enter your License Plate Number"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Signup Button -->
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_signup_car"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="CONTINUE"/>
+
+        <!--<TextView android:id="@+id/link_login"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="24dp"-->
+            <!--android:text="Already a member? Login"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="16dip"/>-->
+
+    </LinearLayout>
+</ScrollView>

@@ -1,5 +1,6 @@
-package com.uber.app.activities;
+package com.uber.app.fragments;
 
+import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -8,9 +9,13 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -18,8 +23,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.uber.app.R;
 import com.uber.app.Utils.util;
+import com.uber.app.activities.LoginActivity;
 import com.uber.app.rest.RestApi;
 
 import org.springframework.http.HttpEntity;
@@ -34,11 +41,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dbEntities.User;
 
-public class SignupActivity extends AppCompatActivity {
-    private static final String TAG = "SignupActivity";
+public class SignUpPersonFragment extends Fragment{
+
+    private static final String TAG = "SignUpActivity";
     public static final String IMAGE_TYPE = "image/*";
     private static final int SELECT_SINGLE_PICTURE = 101;
     private ProgressDialog progressDialog ;
+    private String path;
     @BindView(R.id.input_name)
     EditText _nameText;
     @BindView(R.id.imgView)
@@ -55,38 +64,46 @@ public class SignupActivity extends AppCompatActivity {
     EditText _reEnterPasswordText;
     @BindView(R.id.input_username)
     EditText _username;
-    @BindView(R.id.tenant)
-    CheckBox _tenant;
-    @BindView(R.id.host)
-    CheckBox _host;
+    @BindView(R.id.driver)
+    CheckBox _driver;
+    @BindView(R.id.user)
+    CheckBox _user;
     @BindView(R.id.btn_signup)
     Button _signupButton;
     @BindView(R.id.link_login)
     TextView _loginLink;
 
-    private String path;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-        ButterKnife.bind(this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        _signupButton.setOnClickListener(v -> signup());
+        View retView = inflater.inflate(R.layout.activity_signup_person, container,false);
 
-        _loginLink.setOnClickListener(v -> {
-            // Finish the registration screen and return to the Login activity
-            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-            startActivity(intent);
-            finish();
-            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-        });
+        // Get Fragment belonged Activity
+        final FragmentActivity fragmentBelongActivity = (FragmentActivity) getActivity();
 
-        _img.setOnClickListener(view -> {
-            Intent intent = new Intent();
-            intent.setType(IMAGE_TYPE);
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent,"Select Picture"), SELECT_SINGLE_PICTURE);
-        });
+        if(retView!=null) {
+            ButterKnife.bind(this,retView);
+
+            _signupButton.setOnClickListener(v -> signup());
+
+            _loginLink.setOnClickListener(v -> {
+                // Finish the registration screen and return to the Login activity
+                Intent intent = new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent);
+              //  finish();
+              //  overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+            });
+
+            _img.setOnClickListener(view -> {
+                Intent intent = new Intent();
+                intent.setType(IMAGE_TYPE);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent,"Select Picture"), SELECT_SINGLE_PICTURE);
+            });
+        }
+        return retView;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -130,7 +147,7 @@ public class SignupActivity extends AppCompatActivity {
     public byte[] convertImageToByte(Uri uri){
         byte[] data = null;
         try {
-            ContentResolver cr = getBaseContext().getContentResolver();
+            ContentResolver cr = getActivity().getBaseContext().getContentResolver();
             InputStream inputStream = cr.openInputStream(uri);
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -146,18 +163,18 @@ public class SignupActivity extends AppCompatActivity {
     public void signup() {
         Log.d(TAG, "Signup");
 
-        if (!validate()) {
-            onSignupFailed();
-            return;
-        }
+//        if (!validate()) {
+//            onSignupFailed();
+//            return;
+//        }
 
         _signupButton.setEnabled(false);
 
-        progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Creating Account...");
-        progressDialog.show();
+//        progressDialog = new ProgressDialog(getContext(),
+//                R.style.AppTheme_Dark_Dialog);
+//        progressDialog.setIndeterminate(true);
+//        progressDialog.setMessage("Creating Account...");
+//        progressDialog.show();
 
         String name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
@@ -165,31 +182,34 @@ public class SignupActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
         String surname = _surnameText.getText().toString();
         String username = _username.getText().toString();
-        Boolean host = _host.isChecked();
-        Boolean tenant = _tenant.isChecked();
+        Boolean driver = _driver.isChecked();
+        Boolean user = _user.isChecked();
 
-        new SignUp().execute(name,surname,email,mobile,password,username,host,tenant);
+        onSignupSuccess(null);
+        //new SignUp().execute(name,surname,email,mobile,password,username,driver,user);
     }
 
 
     public void onSignupSuccess(User user) {
         _signupButton.setEnabled(true);
-        setResult(RESULT_OK, null);
+        //setResult(RESULT_OK, null);
 
+        if(_driver.isChecked()){
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.child_car_fragment, new SignUpCarFragment()).commit();
+        }else{
+            //Intent intent = new Intent(getApplicationContext(), MainLoggedInActivity.class);
+            Bundle bundle = new Bundle();
 
-//        Intent intent = new Intent(getApplicationContext(), MainLoggedInActivity.class);
-//        Bundle bundle = new Bundle();
-//
-//        String user_json = new Gson().toJson(user);
-//        bundle.putString("user", user_json);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
-
-        finish();
+            String user_json = new Gson().toJson(user);
+            bundle.putString("user", user_json);
+            //intent.putExtras(bundle);
+            //startActivity(intent);
+        }
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity().getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
         _signupButton.setEnabled(true);
     }
 
@@ -264,7 +284,7 @@ public class SignupActivity extends AppCompatActivity {
         protected User doInBackground(Object... params) {
             String uri = "";
             try {
-                uri = util.getProperty("baseAddress",getApplicationContext()) +  "/register";
+                uri = util.getProperty("baseAddress",getActivity().getApplicationContext()) +  "/register";
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -275,7 +295,7 @@ public class SignupActivity extends AppCompatActivity {
             user.setTelephone(params[3].toString());
             user.setPassword(params[4].toString());
             user.setUsername(params[5].toString());
-            user.setPhoto(path);
+           // user.setPhoto(path);
 
 //            List<Role> roles = new ArrayList<>();
 //            if (Boolean.getBoolean(params[6].toString()))

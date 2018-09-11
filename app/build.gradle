@@ -66,6 +66,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:15.0.1'
     //annotationProcessor 'com.airbnb.android:epoxy-processor:2.3.0'
     compile 'alterUber_backend:alterUber_domain:1.0-SNAPSHOT'
+    compile 'com.beardedhen:androidbootstrap:2.3.2'
     //testCompile 'junit:junit:4.12'
 }
 

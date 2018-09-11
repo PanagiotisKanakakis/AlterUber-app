@@ -1,24 +1,52 @@
 package com.uber.app.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.uber.app.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    private ProgressDialog progressDialog ;
+
+    @BindView(R.id.driver_sign_in)
+    Button driver_button;
+    @BindView(R.id.rider_sign_in)
+    Button rider_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        TypefaceProvider.registerDefaultIconSets();
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        progressDialog =  new ProgressDialog(MainActivity.this,
+                R.style.AppTheme_Dark_Dialog);
+
+        driver_button.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivityForResult(intent, 0);
+            finish();
+            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        });
+
+        rider_button.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivityForResult(intent, 0);
+            finish();
+            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        });
     }
 
     @Override

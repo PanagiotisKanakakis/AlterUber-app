@@ -6,20 +6,18 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.uber.app.rest.RestApi;
 import dbEntities.User;
-import com.google.gson.Gson;
+
 import com.uber.app.R;
 import com.uber.app.Utils.util;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -48,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TypefaceProvider.registerDefaultIconSets();
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
@@ -56,13 +55,16 @@ public class LoginActivity extends AppCompatActivity {
         _loginButton.setOnClickListener(v -> login());
 
         _signupLink.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
             startActivityForResult(intent, REQUEST_SIGNUP);
             finish();
-            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+            //overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+//            Fragment signUpCarFragment = new SignUpPersonFragment();
+//            FragmentManager manager = getFragmentManager();
+//            FragmentTransaction transaction = manager.beginTransaction();
+//            transaction.replace(R.id.login,signUpCarFragment);
+//            transaction.commit();
         });
-
-
     }
 
     @Override
