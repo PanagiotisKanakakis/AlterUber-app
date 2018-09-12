@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
-    >
+    android:fillViewport="true">
+
 
     <LinearLayout
         android:id="@+id/signupPerson"
@@ -27,7 +27,8 @@
             android:layout_marginRight="30dp"
             android:layout_marginBottom="10dp"
             android:clickable="true"
-            android:background="@drawable/profilebig" />
+            android:background="@drawable/profilebig"
+            android:focusable="true" />
 
         <!-- Name Label -->
         <android.support.design.widget.TextInputLayout
@@ -145,7 +146,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/user"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="lollipop" />
 
             <CheckBox
                 android:id="@+id/user"
@@ -164,7 +166,8 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/driver"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="1.0"
+                tools:targetApi="lollipop" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline3"
@@ -190,12 +193,7 @@
             android:layout_marginBottom="24dp"
             android:text="Already a member? Login"
             android:gravity="center"
-            android:textSize="16dip"/>
-
-        <FrameLayout
-            android:id="@+id/child_car_fragment"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="16sp"/>
 
     </LinearLayout>
 </ScrollView>

@@ -1,17 +1,18 @@
 package com.uber.app.fragments;
 
-import android.support.v4.app.Fragment;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +75,13 @@ public class SignUpPersonFragment extends Fragment{
     TextView _loginLink;
 
 
+    public interface FragmentChangeInterface {
+        void changeChildFragment();
+    }
+
+
+    FragmentChangeInterface callback;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -105,6 +113,15 @@ public class SignUpPersonFragment extends Fragment{
         }
         return retView;
     }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        callback= (FragmentChangeInterface) context;
+    }
+
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -195,8 +212,7 @@ public class SignUpPersonFragment extends Fragment{
         //setResult(RESULT_OK, null);
 
         if(_driver.isChecked()){
-            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-            transaction.replace(R.id.child_car_fragment, new SignUpCarFragment()).commit();
+            callback.changeChildFragment();
         }else{
             //Intent intent = new Intent(getApplicationContext(), MainLoggedInActivity.class);
             Bundle bundle = new Bundle();

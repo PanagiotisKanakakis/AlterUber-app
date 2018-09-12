@@ -24,8 +24,6 @@ public class SignUpCarFragment extends Fragment {
     TextView input_license;
     @BindView(R.id.btn_signup_car)
     Button _signup_car;
-    @BindView(R.id.link_login)
-    TextView _loginLink;
     @BindView(R.id.imgView)
     ImageView _img;
     @BindView(R.id.car)

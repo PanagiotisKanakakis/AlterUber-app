@@ -5,9 +5,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 import com.uber.app.R;
+import com.uber.app.fragments.SignUpCarFragment;
 import com.uber.app.fragments.SignUpPersonFragment;
 
-public class SignUpActivity extends FragmentActivity {
+public class SignUpActivity extends FragmentActivity implements SignUpPersonFragment.FragmentChangeInterface {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -15,6 +16,14 @@ public class SignUpActivity extends FragmentActivity {
         setContentView(R.layout.activity_signup);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_placeholder, new SignUpPersonFragment());
-        ft.commit();
+        ft.commitNow();
+    }
+
+    @Override
+    public void changeChildFragment() {
+        setContentView(R.layout.activity_signup);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_placeholder, new SignUpCarFragment());
+        ft.commitNow();
     }
 }
