@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import com.uber.app.R;
 import com.uber.app.Utils.util;
 import com.uber.app.activities.LoginActivity;
+import com.uber.app.activities.MainLoggedInActivity;
 import com.uber.app.rest.RestApi;
 
 import org.springframework.http.HttpEntity;
@@ -40,6 +41,7 @@ import java.io.InputStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dbEntities.Role;
 import dbEntities.User;
 
 public class SignUpPersonFragment extends Fragment{
@@ -88,7 +90,6 @@ public class SignUpPersonFragment extends Fragment{
 
         View retView = inflater.inflate(R.layout.activity_signup_person, container,false);
 
-        // Get Fragment belonged Activity
         final FragmentActivity fragmentBelongActivity = (FragmentActivity) getActivity();
 
         if(retView!=null) {
@@ -97,11 +98,8 @@ public class SignUpPersonFragment extends Fragment{
             _signupButton.setOnClickListener(v -> signup());
 
             _loginLink.setOnClickListener(v -> {
-                // Finish the registration screen and return to the Login activity
                 Intent intent = new Intent(getActivity(),LoginActivity.class);
                 startActivity(intent);
-              //  finish();
-              //  overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             });
 
             _img.setOnClickListener(view -> {
@@ -118,7 +116,7 @@ public class SignUpPersonFragment extends Fragment{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        callback= (FragmentChangeInterface) context;
+        callback = (FragmentChangeInterface) context;
     }
 
 
@@ -178,32 +176,34 @@ public class SignUpPersonFragment extends Fragment{
 
 
     public void signup() {
-        Log.d(TAG, "Signup");
 
+        onSignupSuccess(null);
+
+//        Log.d(TAG, "Signup");
+//
 //        if (!validate()) {
 //            onSignupFailed();
 //            return;
 //        }
-
-        _signupButton.setEnabled(false);
-
+//
+//        _signupButton.setEnabled(false);
+//
 //        progressDialog = new ProgressDialog(getContext(),
 //                R.style.AppTheme_Dark_Dialog);
 //        progressDialog.setIndeterminate(true);
 //        progressDialog.setMessage("Creating Account...");
 //        progressDialog.show();
-
-        String name = _nameText.getText().toString();
-        String email = _emailText.getText().toString();
-        String mobile = _mobileText.getText().toString();
-        String password = _passwordText.getText().toString();
-        String surname = _surnameText.getText().toString();
-        String username = _username.getText().toString();
-        Boolean driver = _driver.isChecked();
-        Boolean user = _user.isChecked();
-
-        onSignupSuccess(null);
-        //new SignUp().execute(name,surname,email,mobile,password,username,driver,user);
+//
+//        String name = _nameText.getText().toString();
+//        String email = _emailText.getText().toString();
+//        String mobile = _mobileText.getText().toString();
+//        String password = _passwordText.getText().toString();
+//        String surname = _surnameText.getText().toString();
+//        String username = _username.getText().toString();
+//        Boolean driver = _driver.isChecked();
+//        Boolean user = _user.isChecked();
+//
+//        new SignUp().execute(name,surname,email,mobile,password,username,driver,user);
     }
 
 
@@ -214,13 +214,12 @@ public class SignUpPersonFragment extends Fragment{
         if(_driver.isChecked()){
             callback.changeChildFragment();
         }else{
-            //Intent intent = new Intent(getApplicationContext(), MainLoggedInActivity.class);
+            Intent intent = new Intent(getActivity(), MainLoggedInActivity.class);
             Bundle bundle = new Bundle();
-
             String user_json = new Gson().toJson(user);
             bundle.putString("user", user_json);
-            //intent.putExtras(bundle);
-            //startActivity(intent);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     }
 
@@ -311,14 +310,14 @@ public class SignUpPersonFragment extends Fragment{
             user.setTelephone(params[3].toString());
             user.setPassword(params[4].toString());
             user.setUsername(params[5].toString());
-           // user.setPhoto(path);
+//            user.setPhoto(path);
 
-//            List<Role> roles = new ArrayList<>();
-//            if (Boolean.getBoolean(params[6].toString()))
-//                roles.add(RoleDto.HOST);
-//            if (Boolean.getBoolean(params[7].toString()))
-//                roles.add(RoleDto.TENANT);
-            user.setRole(null);
+            Role role = new Role();
+            if (Boolean.getBoolean(params[6].toString()))
+                role.setRole("driver");
+            else
+                role.setRole("user");
+            user.setRole(role);
 
             User result = null;
             try {

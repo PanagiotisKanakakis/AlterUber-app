@@ -16,20 +16,18 @@
         android:paddingRight="24dp"
         android:weightSum="1">
 
-        <RelativeLayout
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="1">-->
+
+        <ImageView
+            android:id="@+id/imgView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:background="#ff0000"
-            >
-            <com.beardedhen.androidbootstrap.BootstrapThumbnail
-                android:id="@+id/imgView"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/uber"
-                app:bootstrapBrand="info"
-                app:hasBorder="true" />
-        </RelativeLayout>
+            android:layout_height="match_parent"
+            android:src="@drawable/uber_car"
+            android:adjustViewBounds="true" />
+        <!--</RelativeLayout>-->
 
 
         <TextView
@@ -40,9 +38,9 @@
             android:padding="8dp"
             android:text="Enter your vehicle information"
             android:textColor="@color/black"
-            android:textSize="10pt"
+            android:textSize="14pt"
             android:textStyle="bold"
-            app:fontFamily="@font/roboto_thin"/>
+            app:fontFamily="@font/roboto_thin" />
 
 
         <com.beardedhen.androidbootstrap.BootstrapDropDown
@@ -54,7 +52,7 @@
             android:fadeScrollbars="false"
             android:gravity="right"
             android:textSize="30sp"
-            android:typeface="sans"
+            android:typeface="normal"
             app:bootstrapBrand="regular"
             app:bootstrapExpandDirection="down"
             app:bootstrapSize="lg"

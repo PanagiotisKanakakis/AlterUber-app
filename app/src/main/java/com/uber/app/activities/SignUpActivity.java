@@ -17,6 +17,8 @@ public class SignUpActivity extends FragmentActivity implements SignUpPersonFrag
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_placeholder, new SignUpPersonFragment());
         ft.commitNow();
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
     }
 
     @Override
@@ -25,5 +27,7 @@ public class SignUpActivity extends FragmentActivity implements SignUpPersonFrag
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_placeholder, new SignUpCarFragment());
         ft.commitNow();
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
     }
 }

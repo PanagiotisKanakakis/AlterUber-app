@@ -41,7 +41,20 @@ public class SignUpCarFragment extends Fragment {
         TypefaceProvider.registerDefaultIconSets();
 
         ButterKnife.bind(this,retView);
+
+        _signup_car.setOnClickListener(view -> {
+            registerCar();
+        });
+
+
         return retView;
+    }
+
+    private void registerCar() {
+
+
+
+
     }
 
 

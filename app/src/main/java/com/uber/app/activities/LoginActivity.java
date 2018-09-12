@@ -58,12 +58,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
             startActivityForResult(intent, REQUEST_SIGNUP);
             finish();
-            //overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-//            Fragment signUpCarFragment = new SignUpPersonFragment();
-//            FragmentManager manager = getFragmentManager();
-//            FragmentTransaction transaction = manager.beginTransaction();
-//            transaction.replace(R.id.login,signUpCarFragment);
-//            transaction.commit();
+            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         });
     }
 
